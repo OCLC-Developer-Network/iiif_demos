@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>IIIF Image API Carousel</title>
+<link rel="stylesheet" href="css/blueimp-gallery.min.css">
+<script src="js/blueimp-gallery.min.js"></script>
+</head>
+<body>
+<!-- The Gallery as inline carousel, can be positioned anywhere on the page -->
+<div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
+<div id="links">
+    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/full/pct:25/0/default.jpg" title="A coasting party on the Cripple Creek Short Line">
+        <img src="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/square/100,/0/default.jpg" alt="A coasting party on the Cripple Creek Short Line">
+    </a>
+    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/385/full/pct:25/0/default.jpg" title="Lake Broamoor [sic] from Point Sublime on the Cripple Creek Short Line">
+        <img src="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/385/square/100,/0/default.jpg" alt="Lake Broamoor [sic] from Point Sublime on the Cripple Creek Short Line">
+    </a>
+    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/397/full/pct:25/0/default.jpg" title="Pike's Peak Ave., Colorado Springs, Colo.">
+        <img src="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/397/square/100,/0/default.jpg" alt="Pike's Peak Ave., Colorado Springs, Colo.">
+    </a>
+</div>
+
+<script>
+blueimp.Gallery(
+    document.getElementById('links').getElementsByTagName('a'),
+    {
+        container: '#blueimp-gallery-carousel',
+        carousel: true
+    }
+);
+</script>
+
+</body>
+</html>
