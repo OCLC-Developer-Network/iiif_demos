@@ -3,10 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>List image sizes and metadata</title>
-</head>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
 <script type="application/javascript">
 $(document).ready(function(){
+
    $.getJSON( "https://sandbox.contentdm.oclc.org/digital/iiif-info/coll16/390",
             function (data) {
                     $("#image_info").empty();
@@ -25,9 +28,10 @@ $(document).ready(function(){
 		                var html = '';
 		                html += '<form name="" action="" id="showImage">';
 		                html += '<label>Choose image size</label>';
-	                    html += '<select name="imageSize">';
+	                    html += '<select name="imageSize" id="imageSize">';
 		                $.each(data.sizes, function(i,size){
-		                	html += '<option value="' + size.width +'"">' + size.width + ' x ' + size.height  + '</option>';
+		                	html += '<option value="' + data['@id'] + '/full/' + size.width + ',' + size.height + '/0/default.jpg">';
+		                	html += '<span id="width">' + size.width + '</span> x <span id="height">' + size.height  + '</span></option>';
 		                });
 	                    html += '</select>';
 		                html += '</form>';
@@ -35,16 +39,83 @@ $(document).ready(function(){
 		                
 		    });
 	
-	   $('#showImage').submit(function(event) {
-	        
-	        event.preventDefault();
-	        // create a lightbox
-	    });
+    $(document.body).on('change', '#imageSize', function(event) {
+        console.log($('option:selected', this).text());
+        console.log($('option:selected', this).val());
+         
+         event.preventDefault();
+         // create a lightbox
+         
+         
+         var img = '<img src="' + $('option:selected', this).val() + '" style="width:100%"/>';
+         $('#photo_popup').css("display", "block");
+         $('#mySlide').css("display", "block");
+         $('#mySlide').append(img);
+     });
+    
+    $(document.body).on('click', '.close', function(event) {
+    	$('#photo_popup').css("display", "none");
+    	$("#mySlide").empty();
+    });
+	
 });
 </script>
+<style>
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+img.demo {
+  opacity: 0.6;
+}
+</style>
+</head>
 <body>
 <div id="image_info"></div>
 <div id="select_form"></div>
+<div id="photo_popup" class="modal">
+<span class="close cursor">&times;</span>
+<div class="modal-content">
+    <div id="mySlide"></div>
+</div>
+</div>
 
 
 <!-- https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/info.json
