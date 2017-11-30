@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>List image sizes and metadata</title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="application/javascript">
+$(document).ready(function(){
+   $.getJSON( "https://sandbox.contentdm.oclc.org/digital/iiif-info/coll16/390",
+            function (data) {
+                    $("#image_info").empty();
+                        var html = '';
+                        html += '<div style="float:left"><img src="' + data.sequences[0].canvases[0].images[0].resource.service['@id'] + '/square/300,/0/default.jpg"/></div>';
+                        html += '<table>';
+                        $.each(data.metadata, function(i,field){
+                            html += '<tr><th>' + field.label + '</th><td>' + field.value + '</td></tr>';
+                        });
+                        html += '</table>';
+                        $('#image_info').append(html);
+                        
+            });
+	$.getJSON( "https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/info.json",
+		    function (data) {
+		                var html = '';
+		                html += '<form name="" action="" id="showImage">';
+		                html += '<label>Choose image size</label>';
+	                    html += '<select name="imageSize">';
+		                $.each(data.sizes, function(i,size){
+		                	html += '<option value="' + size.width +'"">' + size.width + ' x ' + size.height  + '</option>';
+		                });
+	                    html += '</select>';
+		                html += '</form>';
+		                $('#select_form').append(html);
+		                
+		    });
+	
+	   $('#showImage').submit(function(event) {
+	        
+	        event.preventDefault();
+	        // create a lightbox
+	    });
+});
+</script>
+<body>
+<div id="image_info"></div>
+<div id="select_form"></div>
+
+
+<!-- https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/info.json
+https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/full/480,/0/default.jpg
+https://sandbox.contentdm.oclc.org/digital/iiif-info/coll16/390
+ -->
+</body>
+</html>
