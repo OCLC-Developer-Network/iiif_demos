@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>IIIF Image API Dynamic Carousel</title>
+<link rel="stylesheet" href="css/blueimp-gallery.min.css">
+<script src="js/blueimp-gallery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="gallery_name"></div>
+<!-- The Gallery as inline carousel, can be positioned anywhere on the page -->
+<div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
+<script>
+$.getJSON( "http://localhost:8080/git/iiif_demos/kac_nga_highlights.json",
+     function (data) {
+         $('#gallery_name').append('<h2 style="text-align:center">' + data.label + '</h2>');
+         var carouselLinks = []
+         $.each(data.sequences[0].canvases, function(i,canvas){
+             carouselLinks.push({
+               href: canvas.images[0].resource.service['@id'] + '/full/1000,/0/default.jpg',
+               title: canvas.label
+               });
+         });
+          // Initialize the Gallery as image carousel:
+             blueimp.Gallery(carouselLinks, {
+               container: '#blueimp-gallery-carousel',
+               carousel: true
+             });                       
+                 
+     });
+</script>
+
+</body>
+</html>
