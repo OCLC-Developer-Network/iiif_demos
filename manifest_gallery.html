@@ -10,14 +10,15 @@
 <script type="application/javascript">
 
 function addPaging(id) {
+	$("#paging").empty();
     var next = Number(id) + 1;
-    var prev = Number(id) -1;
+    var prev = Number(id) - 1;
     var paging = '';
 
-    if (prev > 0){
-    paging += '<a class="prev" id=""' + prev + '">&#10094;</a>';
+    if (id > 1){
+        paging += '<a class="prev" id="' + prev + '">&#10094;</a>';
     }
-    if (next < 4){
+    if (id < 4){
         paging += '<a class="next" id="' + next + '">&#10095;</a>';
     }
    $('#paging').append(paging);
@@ -25,7 +26,7 @@ function addPaging(id) {
 
 $(document).ready(function(){
 	
-   $.getJSON( "http://localhost:8080/git/iiif_demo/kac_nga_highlights.json",
+   $.getJSON( "http://localhost:8080/git/iiif_demos/kac_nga_highlights.json",
             function (data) {
                     $("#images").empty();
                         var html = '';
@@ -63,6 +64,7 @@ $(document).ready(function(){
     	$('#photo_popup').css("display", "none");
     	$("#mySlide").empty();
     	$("#caption").empty();
+    	$("#paging").empty();
     });
 
     $(document.body).on('click', '.prev', function(event) {
