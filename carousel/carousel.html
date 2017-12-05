@@ -17,26 +17,28 @@
     <ol class="indicator"></ol>
 </div>
 
-<div id="links">
-    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/full/pct:25/0/default.jpg" title="A coasting party on the Cripple Creek Short Line">
+<div id="links" style="display:none">
+    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/full/pct:20/0/default.jpg" title="A coasting party on the Cripple Creek Short Line">
         <img src="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/390/square/100,/0/default.jpg" alt="A coasting party on the Cripple Creek Short Line">
     </a>
-    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/385/full/pct:25/0/default.jpg" title="Lake Broamoor [sic] from Point Sublime on the Cripple Creek Short Line">
+    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/385/full/pct:20/0/default.jpg" title="Lake Broamoor [sic] from Point Sublime on the Cripple Creek Short Line">
         <img src="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/385/square/100,/0/default.jpg" alt="Lake Broamoor [sic] from Point Sublime on the Cripple Creek Short Line">
     </a>
-    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/397/full/pct:25/0/default.jpg" title="Pike's Peak Ave., Colorado Springs, Colo.">
+    <a href="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/397/full/pct:20/0/default.jpg" title="Pike's Peak Ave., Colorado Springs, Colo.">
         <img src="https://sandbox.contentdm.oclc.org/digital/iiif/coll16/397/square/100,/0/default.jpg" alt="Pike's Peak Ave., Colorado Springs, Colo.">
     </a>
 </div>
 
 <script>
-blueimp.Gallery(
-    document.getElementById('links').getElementsByTagName('a'),
-    {
-        container: '#blueimp-gallery-carousel',
-        carousel: true
-    }
-);
+document.addEventListener("DOMContentLoaded", function(event) { 
+	blueimp.Gallery(
+	    document.getElementById('links').getElementsByTagName('a'),
+	    {
+	        container: '#blueimp-gallery-carousel',
+	        carousel: true
+	    }
+	);
+});
 </script>
 
 </body>
