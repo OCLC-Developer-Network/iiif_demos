@@ -8,8 +8,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <script type="application/javascript">
-$(document).ready(function(){
 
+function addPaging(id) {
+    var next = Number(id) + 1;
+    var prev = Number(id) -1;
+    var paging = '';
+
+    if (prev > 0){
+    paging += '<a class="prev" id=""' + prev + '">&#10094;</a>';
+    }
+    if (next < 4){
+        paging += '<a class="next" id="' + next + '">&#10095;</a>';
+    }
+   $('#paging').append(paging);
+}
+
+$(document).ready(function(){
+	
    $.getJSON( "http://localhost:8080/git/iiif_demo/kac_nga_highlights.json",
             function (data) {
                     $("#images").empty();
@@ -17,8 +32,9 @@ $(document).ready(function(){
                         html += '<h2 style="text-align:center">' + data.label + '</h2>';
                         html += '<div class="row">';
                         $.each(data.sequences[0].canvases, function(i,canvas){
+                        	var numbertext = i + 1
                         	html += '<div class="column">';
-                        	html += '<span id="' + canvas.images[0].resource.service['@id'] + '"><img src="' + canvas.images[0].resource.service['@id'] + '/full/300,/0/default.jpg" alt="' + canvas.label + '" class="hover-shadow-cursor" id="' + i + 1 + '"/></span>';
+                        	html += '<span id="' + canvas.images[0].resource.service['@id'] + '"><img src="' + canvas.images[0].resource.service['@id'] + '/full/300,/0/default.jpg" alt="' + canvas.label + '" class="hover-shadow-cursor" id="' + numbertext + '"/></span>';
                         	html += '</div>';
                         });
                         html += '</div>';
@@ -38,6 +54,7 @@ $(document).ready(function(){
          $('#photo_popup').css("display", "block");
          $('#mySlide').css("display", "block");
          $('#mySlide').append(img);
+         addPaging(id);
          
          $('#caption').append(caption);
      });
@@ -47,26 +64,45 @@ $(document).ready(function(){
     	$("#mySlide").empty();
     	$("#caption").empty();
     });
-	
-    $(document.body).on('click', '.next', function(event) {
-        
+
+    $(document.body).on('click', '.prev', function(event) {
         event.preventDefault();
-        
-        // go grab id + 1
+        var id = $(this).attr('id');
+        $("#mySlide").empty();
+        $("#caption").empty();
+         
+         // create a lightbox
+         var img = '<div class="numbertext">' + id + ' / 4</div>';
+         img += '<img src="' + $("#" + id).parent().attr('id') + '/full/1000,/0/default.jpg" style="width:100%"/>';
+         var caption = $("#" + id).attr('alt');
+         
+         $('#photo_popup').css("display", "block");
+         $('#mySlide').css("display", "block");
+         $('#mySlide').append(img);
+         addPaging(id);
+         
+         $('#caption').append(caption);
+     });
+    
+    $(document.body).on('click', '.next', function(event) {
+       event.preventDefault();
+       var id = $(this).attr('id');
+       $("#mySlide").empty();
+       $("#caption").empty();
         
         // create a lightbox
-        var id = $(this).attr('id');
         var img = '<div class="numbertext">' + id + ' / 4</div>';
-        img += '<img src="' + $(this).parent().attr('id') + '/full/1000,/0/default.jpg" style="width:100%"/>';
-        var caption = $(this).attr('alt');
-        console.log(img);
+        img += '<img src="' + $("#" + id).parent().attr('id') + '/full/1000,/0/default.jpg" style="width:100%"/>';
+        var caption = $("#" + id).attr('alt');
         
         $('#photo_popup').css("display", "block");
         $('#mySlide').css("display", "block");
         $('#mySlide').append(img);
+        addPaging(id);
         
         $('#caption').append(caption);
     });
+    
     
 });
 </script>
@@ -206,8 +242,8 @@ img.hover-shadow {
 <span class="close cursor">&times;</span>
 <div class="modal-content">
     <div id="mySlide"></div>
-    <a class="prev">&#10094;</a>
-    <a class="next">&#10095;</a>
+    <div id="paging">
+    </div>
 
     <div class="caption-container">
       <p id="caption"></p>
