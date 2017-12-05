@@ -11,12 +11,11 @@
     }
   ],
   "description": "A selection of highlights from the National Gallery of Art",
-  "guid": "e61700b6-7cb9-4c14-92ab-4246a345ec71",
+ 
   "viewingDirection": "left-to-right",
   "viewingHint": "individuals",
   "sequences": [
     {
-      "@id": "https://media.nga.gov/public/manifests/sequence/normal.json",
       "@type": "sc:Sequence",
       "label": "Normal Order",
       "canvases": [
