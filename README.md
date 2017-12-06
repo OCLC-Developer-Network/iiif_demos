@@ -26,3 +26,7 @@ The manifests in the demo are created based on
 [Manifest Compound Object](https://sandbox.contentdm.oclc.org/digital/iiif-info/p10010coll1/42)
 
 [Manifest for a Self Created Collection](https://github.com/OCLC-Developer-Network/iiif_demos/blob/master/kac_cmd_highlights.json)
+
+#### IIIF Tools And Examples
+[Awesome IIIF Tools](https://github.com/IIIF/awesome-iiif)
+[Site Integration](http://ronallo.com/iiif-workshop/now/site-integration.html)
