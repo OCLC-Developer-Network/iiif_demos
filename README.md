@@ -29,4 +29,5 @@ The manifests in the demo are created based on
 
 #### IIIF Tools And Examples
 [Awesome IIIF Tools](https://github.com/IIIF/awesome-iiif)
+
 [Site Integration](http://ronallo.com/iiif-workshop/now/site-integration.html)
