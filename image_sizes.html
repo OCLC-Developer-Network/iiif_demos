@@ -14,7 +14,7 @@ $(document).ready(function(){
             function (data) {
                     $("#image_info").empty();
                         var html = '';
-                        html += '<div style="float:left"><img src="' + data.sequences[0].canvases[0].images[0].resource.service['@id'] + '/square/300,/0/default.jpg"/></div>';
+                        html += '<div style="float:left"><img src="' + data.sequences[0].canvases[0].images[0].resource.service['@id'] + '/square/300,/0/default.jpg" class="view" id="' + data.sequences[0].canvases[0].images[0].resource.service['@id'] + '"/></div>';
                         html += '<table>';
                         $.each(data.metadata, function(i,field){
                             html += '<tr><th>' + field.label + '</th><td>' + field.value + '</td></tr>';
@@ -43,15 +43,17 @@ $(document).ready(function(){
         console.log($('option:selected', this).text());
         console.log($('option:selected', this).val());
          
-         event.preventDefault();
-         // create a lightbox
+        event.preventDefault();
+        window.open($('option:selected', this).val());
          
-         
-         var img = '<img src="' + $('option:selected', this).val() + '" style="width:100%"/>';
-         $('#photo_popup').css("display", "block");
-         $('#mySlide').css("display", "block");
-         $('#mySlide').append(img);
      });
+    
+    $(document.body).on('click', '.view', function(event) {
+        var img = '<img src="' + $(this).attr('id') + '/full/1200,/0/default.jpg" style="width:100%"/>';
+        $('#photo_popup').css("display", "block");
+        $('#mySlide').css("display", "block");
+        $('#mySlide').append(img);
+    })
     
     $(document.body).on('click', '.close', function(event) {
     	$('#photo_popup').css("display", "none");

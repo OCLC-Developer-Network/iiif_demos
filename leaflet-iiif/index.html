@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Leaflet demo</title>
+<link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="bower_components/leaflet/dist/leaflet.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="bower_components/leaflet-iiif/leaflet-iiif.js"></script>
+<style>
+
+html, body, #map{
+  height: 100%;
+  margin: 0;
+}
+
+</style>
+
+</head>
+<body>
+<div id="map"></div>
+
+<script type="application/javascript">
+var map = L.map('map', {
+      center: [0, 0],
+      crs: L.CRS.Simple,
+      zoom: 0,
+    })
+
+    L.tileLayer.iiif('https://stacks.stanford.edu/image/iiif/hg676jb4964%2F0380_796-44/info.json', {
+      tileSize: 1024
+    }).addTo(map);
+
+    
+</script>
+</body>
+</html>
